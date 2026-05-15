@@ -1,0 +1,232 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+
+  /* Custom design tokens */
+  --color-brand: var(--brand);
+  --color-brand-muted: var(--brand-muted);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-glow: var(--glow);
+}
+
+/* ── FORCED DARK THEME (no light mode) ─────────────────────── */
+:root,
+.dark {
+  --background: oklch(0.09 0.005 265);
+  --foreground: oklch(0.96 0.005 265);
+
+  --card: oklch(0.13 0.008 265);
+  --card-foreground: oklch(0.96 0.005 265);
+
+  --popover: oklch(0.13 0.008 265);
+  --popover-foreground: oklch(0.96 0.005 265);
+
+  /* Brand: electric violet */
+  --primary: oklch(0.65 0.22 285);
+  --primary-foreground: oklch(0.98 0.005 265);
+
+  --secondary: oklch(0.18 0.01 265);
+  --secondary-foreground: oklch(0.85 0.01 265);
+
+  --muted: oklch(0.16 0.008 265);
+  --muted-foreground: oklch(0.55 0.015 265);
+
+  --accent: oklch(0.65 0.22 285 / 12%);
+  --accent-foreground: oklch(0.75 0.18 285);
+
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.65 0.22 285 / 40%);
+
+  --radius: 0.75rem;
+
+  /* Custom tokens */
+  --brand: oklch(0.65 0.22 285);
+  --brand-muted: oklch(0.65 0.22 285 / 15%);
+  --surface: oklch(0.13 0.008 265);
+  --surface-raised: oklch(0.17 0.01 265);
+  --glow: oklch(0.65 0.22 285 / 20%);
+
+  /* ATS score colors */
+  --score-high: oklch(0.7 0.18 145);
+  --score-mid: oklch(0.75 0.18 75);
+  --score-low: oklch(0.65 0.22 25);
+
+  --sidebar: oklch(0.11 0.007 265);
+  --sidebar-foreground: oklch(0.96 0.005 265);
+  --sidebar-primary: oklch(0.65 0.22 285);
+  --sidebar-primary-foreground: oklch(0.98 0.005 265);
+  --sidebar-accent: oklch(0.18 0.01 265);
+  --sidebar-accent-foreground: oklch(0.85 0.01 265);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.65 0.22 285 / 40%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+  ::selection {
+    background: oklch(0.65 0.22 285 / 30%);
+  }
+}
+
+/* ── UTILITY CLASSES ──────────────────────────────────────────── */
+@layer utilities {
+  /* Glassmorphism surface */
+  .glass {
+    background: oklch(0.13 0.008 265 / 80%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid oklch(1 0 0 / 8%);
+  }
+
+  /* Brand glow */
+  .glow-brand {
+    box-shadow:
+      0 0 0 1px oklch(0.65 0.22 285 / 20%),
+      0 0 20px oklch(0.65 0.22 285 / 15%),
+      0 0 40px oklch(0.65 0.22 285 / 8%);
+  }
+
+  /* Subtle text gradient */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.85 0.15 285) 0%,
+      oklch(0.75 0.2 305) 50%,
+      oklch(0.7 0.18 260) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animated upload border */
+  .upload-border {
+    border: 2px dashed oklch(1 0 0 / 15%);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .upload-border:hover,
+  .upload-border.active {
+    border-color: oklch(0.65 0.22 285 / 60%);
+    background: oklch(0.65 0.22 285 / 5%);
+  }
+
+  /* Step indicator */
+  .step-active {
+    background: oklch(0.65 0.22 285 / 20%);
+    border-color: oklch(0.65 0.22 285 / 60%);
+    color: oklch(0.75 0.18 285);
+  }
+  .step-done {
+    background: oklch(0.7 0.18 145 / 20%);
+    border-color: oklch(0.7 0.18 145 / 60%);
+    color: oklch(0.7 0.18 145);
+  }
+  .step-idle {
+    background: oklch(0.16 0.008 265);
+    border-color: oklch(1 0 0 / 8%);
+    color: oklch(0.55 0.015 265);
+  }
+}
+
+/* ── SCROLLBAR STYLING ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(1 0 0 / 15%);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.65 0.22 285 / 40%);
+}
+
+/* ── MONACO EDITOR OVERRIDE ──────────────────────────────────── */
+.monaco-editor-container .monaco-editor {
+  background: oklch(0.11 0.007 265) !important;
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.65 0.22 285 / 0%); }
+  50%       { box-shadow: 0 0 20px 4px oklch(0.65 0.22 285 / 20%); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position: 200% center; }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.16 0.008 265) 25%,
+    oklch(0.22 0.01 265) 50%,
+    oklch(0.16 0.008 265) 75%
+  );
+  background-size: 200% auto;
+  animation: shimmer 1.8s linear infinite;
+}
