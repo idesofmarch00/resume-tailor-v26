@@ -69,15 +69,25 @@ export function OutputPanel({ result }: OutputPanelProps) {
   async function handleOverleaf() {
     setOverleafLoading(true);
     try {
-      const res = await fetch("/api/overleaf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ latex: result.latex, fileName: result.outputFileName }),
-      });
-      const data = await res.json();
-      if (data.overleafUrl) {
-        window.open(data.overleafUrl, "_blank");
-      }
+      // Create a hidden form to POST directly to Overleaf
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "https://www.overleaf.com/docs";
+      form.target = "_blank";
+
+      const snipInput = document.createElement("input");
+      snipInput.type = "hidden";
+      snipInput.name = "snip";
+      snipInput.value = result.latex;
+
+      form.appendChild(snipInput);
+      document.body.appendChild(form);
+      form.submit();
+
+      // Cleanup
+      setTimeout(() => {
+        document.body.removeChild(form);
+      }, 1000);
     } finally {
       setOverleafLoading(false);
     }

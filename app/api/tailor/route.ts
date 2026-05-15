@@ -4,6 +4,10 @@ import { TAILORING_SYSTEM_PROMPT } from "@/lib/ai/prompts";
 import { generateWithFallback } from "@/lib/ai/provider";
 import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
 
+// Fix for Next.js "Setting up fake worker failed" error:
+// Instruct PDF.js to use the unpkg CDN for the worker instead of trying to dynamically import a local chunk.
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.mjs`;
+
 // ── PDF Text Extraction ──────────────────────────────────────
 
 async function extractPdfText(data: Buffer): Promise<string> {
