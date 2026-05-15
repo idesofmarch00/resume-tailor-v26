@@ -8,13 +8,15 @@ import { CheckCircle2, AlertCircle, XCircle, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ATSScoreCardProps {
-  atsScore: ATSFeedback;
+  atsScore: number;
+  atsFeedback: ATSFeedback;
   companyName: string;
   roleTitle: string;
 }
 
-export function ATSScoreCard({ atsScore, companyName, roleTitle }: ATSScoreCardProps) {
-  const { score, strengths, improvements, missingKeywords } = atsScore;
+export function ATSScoreCard({ atsScore, atsFeedback, companyName, roleTitle }: ATSScoreCardProps) {
+  const { strengths, improvements, missingKeywords } = atsFeedback;
+  const score = atsScore;
 
   const scoreColor =
     score >= 80
@@ -86,6 +88,9 @@ export function ATSScoreCard({ atsScore, companyName, roleTitle }: ATSScoreCardP
               · {s}
             </p>
           ))}
+          {strengths.length === 0 && (
+            <p className="text-xs text-muted-foreground/50 italic">No data</p>
+          )}
         </div>
 
         {/* Improvements */}
@@ -99,6 +104,9 @@ export function ATSScoreCard({ atsScore, companyName, roleTitle }: ATSScoreCardP
               · {s}
             </p>
           ))}
+          {improvements.length === 0 && (
+            <p className="text-xs text-muted-foreground/50 italic">No data</p>
+          )}
         </div>
 
         {/* Missing Keywords */}
@@ -118,6 +126,9 @@ export function ATSScoreCard({ atsScore, companyName, roleTitle }: ATSScoreCardP
               </Badge>
             ))}
           </div>
+          {missingKeywords.length === 0 && (
+            <p className="text-xs text-muted-foreground/50 italic">No data</p>
+          )}
         </div>
       </div>
     </Card>

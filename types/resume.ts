@@ -33,8 +33,9 @@ export interface TailoringResult {
   jdTitle: string;
   companyName: string;
   year: number;
-  atsScore: ATSFeedback;
-  outputFileName: string; // e.g. Sahil_Ahmed_LeadFrontendEngineer_2026
+  atsScore: number;          // numeric score 0-100
+  atsFeedback: ATSFeedback;  // detailed feedback object
+  outputFileName: string;    // e.g. Sahil_Ahmed_LeadFrontendEngineer_2026
 }
 
 export type TailoringStatus =

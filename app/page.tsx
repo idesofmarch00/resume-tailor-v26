@@ -181,7 +181,7 @@ export default function DashboardPage() {
         {result && (
           <div className="space-y-6 animate-slide-up">
             {/* ATS Score */}
-            <ATSScoreCard atsScore={result.atsScore} companyName={result.companyName} roleTitle={result.jdTitle} />
+            <ATSScoreCard atsScore={result.atsScore} atsFeedback={result.atsFeedback} companyName={result.companyName} roleTitle={result.jdTitle} />
 
             {/* LaTeX Output + Downloads */}
             <OutputPanel result={result} />

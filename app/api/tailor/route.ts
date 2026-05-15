@@ -140,7 +140,21 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      data: { latex, candidateName, jdTitle: roleTitle, companyName, outputFileName, atsScore: atsScore.score, atsFeedback: { strengths: atsScore.strengths, improvements: atsScore.improvements, missingKeywords: atsScore.missingKeywords } }
+      data: {
+        latex,
+        candidateName,
+        jdTitle: roleTitle,
+        companyName,
+        year,
+        outputFileName,
+        atsScore: atsScore.score,
+        atsFeedback: {
+          score: atsScore.score,
+          strengths: atsScore.strengths ?? [],
+          improvements: atsScore.improvements ?? [],
+          missingKeywords: atsScore.missingKeywords ?? [],
+        },
+      },
     });
 
   } catch (err) {
