@@ -53,10 +53,11 @@ Write a 3–4 line summary that:
 - Positions the candidate as the direct solution
 - Mentions 3–4 top skills that appear in the JD
 
-### 2. The "Double-Down" Skill Rule
-Every primary skill mentioned in `{{JD_TEXT}}` **must**:
-- Appear in the `Technical Skills` section
-- Appear **2–3 times** naturally within `Professional Experience`
+### 2. Skills Tailoring & The "Double-Down" Skill Rule
+- Dynamically adapt, reorganize, and highlight skills based specifically on the **{{JD_TITLE}}** role and the **{{COMPANY_NAME}}** Job Description.
+- Every primary skill mentioned in `{{JD_TEXT}}` **must**:
+  - Appear in the `Technical Skills` section
+  - Appear **2–3 times** naturally within `Professional Experience`
 
 ### 3. Quantifiable Impact (Non-Negotiable)
 You **must invent/infer** metrics if none are provided:
@@ -70,24 +71,28 @@ You **must invent/infer** metrics if none are provided:
 Include these **where contextually plausible** across the experience sections:
 `System Design · HLD/LLD · AWS · GCP · LLM/GenAI · MCP (Model Context Protocol) · Agentic Coding · AI-Driven Development`
 
-### 5. Formatting Rules (STRICT)
+### 5. ⚠️ Critical Info Preservation
+- You **MUST retain the exact original contact details**: Name, Email, Phone number, LinkedIn, GitHub, and Portfolio links. Do **NOT** drop the phone number or email under any circumstances.
+- Retain the exact original Education details (Name, Degree, CGPA, Year).
+- Retain the original candidate's current Designation/Title if relevant to the header.
+
+### 6. Formatting Rules (STRICT)
 - ❌ NO bullet points — use straight-line descriptions with `·` separator
 - ❌ NO hobbies section
 - ❌ NO colors or borders (LaTeX only)
-- ✅ Headers: `\section{Professional Experience}`, `\section{Technical Skills}`, `\section{Education}`
+- ✅ Headers: `\section{Professional Experience}`, `\section{Projects}`, `\section{Technical Skills}`, `\section{Education}`
 - ✅ Full form + abbreviation on first use: "Software Engineer (SWE)", "CI/CD", "LLM"
-- ✅ Education: Name, Degree, CGPA (8.3), Year — nothing else
 - ✅ Font: 12pt headers, 10pt body (enforce in LaTeX preamble)
 
-### 6. Company Pain Point Positioning
+### 7. Company Pain Point Positioning
 Use `{{COMPANY_RESEARCH}}` (sourced from Gemini's live web search grounding) to identify:
 - Their primary engineering challenge (scale, migration, DX, performance, GenAI adoption)
 - Reference it subtly in the summary and 1–2 experience bullets
 
-### 7. GitHub Repo Integration
-From `{{GITHUB_DATA}}`, identify repos that match JD skills and reference them naturally:
-- "Maintained open-source {{REPO_NAME}}, achieving 10k+ GitHub stars"
-- "Contributed to {{REPO_NAME}} reducing bundle size by 35%"
+### 8. GitHub Repo Integration in Projects Section
+- Carefully select the 2-3 most relevant GitHub repositories from the provided list that match the JD's required skills.
+- Use these selected repos to populate a dedicated `\section{Projects}`.
+- Describe each project with strong action verbs and metrics, emphasizing how they demonstrate the required skills.
 
 ---
 
