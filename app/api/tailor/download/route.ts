@@ -235,7 +235,7 @@ export async function POST(req: NextRequest) {
 
     if (type === "pdf") {
       const pdfBuffer = generatePDF(sections, fileName);
-      return new NextResponse(pdfBuffer, {
+      return new NextResponse(new Uint8Array(pdfBuffer), {
         status: 200,
         headers: {
           "Content-Type": "application/pdf",
@@ -246,7 +246,7 @@ export async function POST(req: NextRequest) {
 
     if (type === "docx") {
       const docxBuffer = await generateDOCX(sections);
-      return new NextResponse(docxBuffer, {
+      return new NextResponse(new Uint8Array(docxBuffer), {
         status: 200,
         headers: {
           "Content-Type":

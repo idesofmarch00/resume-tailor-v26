@@ -28,7 +28,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
-        <TooltipProvider delayDuration={200}>
+        <TooltipProvider delay={200}>
           {children}
         </TooltipProvider>
       </body>

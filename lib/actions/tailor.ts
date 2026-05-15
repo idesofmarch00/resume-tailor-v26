@@ -73,7 +73,13 @@ export async function tailorResume(formData: FormData): Promise<TailoringResult>
     jdTitle: jdMeta.roleTitle,
     companyName: jdMeta.companyName,
     year: currentYear,
-    atsScore: atsResult,
+    atsScore: atsResult.score,
+    atsFeedback: {
+      score: atsResult.score,
+      strengths: atsResult.strengths || [],
+      improvements: atsResult.improvements || [],
+      missingKeywords: atsResult.missingKeywords || [],
+    },
     outputFileName,
   };
 }

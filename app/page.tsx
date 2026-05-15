@@ -108,7 +108,7 @@ export default function DashboardPage() {
             id="resume-uploader"
             label="Your Resume"
             accept={{ "application/pdf": [".pdf"] }}
-            hint="PDF only · parsed via pdf-parse"
+            hint="PDF only · text auto-extracted"
             file={resumeFile}
             onFileChange={setResumeFile}
             fallbackText={resumeText}

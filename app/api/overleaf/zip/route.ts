@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       compressionOptions: { level: 6 },
     });
 
-    return new NextResponse(zipBuffer, {
+    return new NextResponse(new Uint8Array(zipBuffer), {
       status: 200,
       headers: {
         "Content-Type": "application/zip",

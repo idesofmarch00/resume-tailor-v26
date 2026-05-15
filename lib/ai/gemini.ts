@@ -31,7 +31,7 @@ Be specific. Focus on information useful for tailoring a resume.
 
   const result = await proModel.generateContent({
     contents: [{ role: "user", parts: [{ text: prompt }] }],
-    tools: [{ googleSearch: {} }], // ← Live web search, no extra API key
+    tools: [{ googleSearchRetrieval: { dynamicRetrievalConfig: { mode: "MODE_DYNAMIC", dynamicThreshold: 0.7 } } }], // ← Live web search, no extra API key
   } as Parameters<typeof proModel.generateContent>[0]);
 
   return result.response.text();

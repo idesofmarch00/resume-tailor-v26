@@ -22,15 +22,15 @@ export function ATSScoreCard({ atsScore, atsFeedback, companyName, roleTitle }: 
     score >= 80
       ? "text-emerald-400"
       : score >= 70
-      ? "text-amber-400"
-      : "text-red-400";
+        ? "text-amber-400"
+        : "text-red-400";
 
   const progressColor =
     score >= 80
       ? "[&>div]:bg-emerald-500"
       : score >= 70
-      ? "[&>div]:bg-amber-500"
-      : "[&>div]:bg-red-500";
+        ? "[&>div]:bg-amber-500"
+        : "[&>div]:bg-red-500";
 
   const scoreLabel =
     score >= 80 ? "Strong Match" : score >= 70 ? "Good Match" : "Needs Work";
