@@ -2,30 +2,27 @@ import { NextRequest, NextResponse } from "next/server";
 import { fetchPublicRepos, formatReposForPrompt } from "@/services/github";
 import { TAILORING_SYSTEM_PROMPT } from "@/lib/ai/prompts";
 import { generateWithFallback } from "@/lib/ai/provider";
-import * as pdfjs from "pdfjs-dist/legacy/build/pdf.mjs";
-
-// Fix for Next.js "Setting up fake worker failed" error:
-// Instruct PDF.js to use the unpkg CDN for the worker instead of trying to dynamically import a local chunk.
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.mjs`;
+import PDFParser from "pdf2json";
 
 // ── PDF Text Extraction ──────────────────────────────────────
 
 async function extractPdfText(data: Buffer): Promise<string> {
-  const uint8 = new Uint8Array(data);
-  const doc = await pdfjs.getDocument({ data: uint8, verbosity: 0 }).promise;
-  const pages: string[] = [];
-  for (let i = 1; i <= doc.numPages; i++) {
-    const page = await doc.getPage(i);
-    const content = await page.getTextContent();
-    const text = content.items
-      .filter((item: any) => "str" in item)
-      .map((item: any) => item.str)
-      .join(" ");
-    pages.push(text);
-    page.cleanup();
-  }
-  await doc.destroy();
-  return pages.join("\n\n");
+  return new Promise((resolve, reject) => {
+    // Pass null for context and 1 to indicate text-only parsing
+    const pdfParser = new (PDFParser as any)(null, 1);
+
+    pdfParser.on("pdfParser_dataError", (errData: any) => {
+      console.error("PDF Parsing Error:", errData.parserError);
+      reject(new Error("Failed to parse PDF"));
+    });
+
+    pdfParser.on("pdfParser_dataReady", () => {
+      const text = pdfParser.getRawTextContent();
+      resolve(text);
+    });
+
+    pdfParser.parseBuffer(data);
+  });
 }
 
 // ── Helper: generate text with fallback ──────────────────────

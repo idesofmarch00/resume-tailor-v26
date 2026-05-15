@@ -35,6 +35,9 @@ function parseLatex(latex: string): Section[] {
     if (/^\\(geometry|hypersetup|titleformat|titlespacing)\b/.test(line)) continue;
     if (line === "\\maketitle") continue;
 
+    // Skip LaTeX comments
+    if (line.startsWith("%")) continue;
+
     // Section headers
     const sectionMatch = line.match(/\\section\*?\{(.+?)\}/);
     if (sectionMatch) {
@@ -64,9 +67,10 @@ function parseLatex(latex: string): Section[] {
       .replace(/\\\\$/g, "")
       .replace(/\\\\/g, "")
       .replace(/\\hfill/g, "  —  ")
+      .replace(/\$\|\$/g, "|") // Convert $|$ to |
+      .replace(/\\\$/g, "$")
       .replace(/\\&/g, "&")
       .replace(/\\%/g, "%")
-      .replace(/\\\$/g, "$")
       .replace(/\\#/g, "#")
       .replace(/\{|\}/g, "")
       .replace(/~/, " ")

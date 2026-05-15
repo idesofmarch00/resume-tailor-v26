@@ -53,7 +53,7 @@ Company Research (from live web search):
    - Headers: \\section{Professional Experience}, \\section{Technical Skills}, \\section{Education}
    - Full form + abbreviation on first use: "Software Engineer (SWE)", "CI/CD"
    - Education: Name, Degree, CGPA (8.3), Year only
-   - Font: 12pt headers, 10pt body
+   - USE STANDARD LaTeX 11pt article class. DO NOT redefine fonts (no \\makeatletter) and do NOT use \\small excessively. Let the default formatting handle the layout.
 
 6. GITHUB REPOS: Reference matching repos naturally in experience descriptions.
 
