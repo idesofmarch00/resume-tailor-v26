@@ -89,6 +89,18 @@ function buildProviders(): ProviderEntry[] {
     });
   }
 
+  // Cerebras Fallback (Extremely fast inference)
+  if (process.env.CEREBRAS_API_KEY) {
+    const cerebras = new OpenAI({
+      apiKey: process.env.CEREBRAS_API_KEY,
+      baseURL: "https://api.cerebras.ai/v1",
+    });
+    providers.push({
+      name: "cerebras/llama3.3-70b",
+      generate: (opts) => callOpenAI(cerebras, "llama3.3-70b", opts),
+    });
+  }
+
   return providers;
 }
 
